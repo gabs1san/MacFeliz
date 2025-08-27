@@ -23,7 +23,7 @@ namespace MacFeliz.Models
         [StringLength(200, MinimumLength = 20, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo {2}")]
         [Required(ErrorMessage = "A descrição detalhada do lanche deve ser informada")]
         [Display(Name = "Nome do Lanche")]
-        public string DescricaoDetalahada { get; set; }
+        public string DescricaoDetalahada{ get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
         [Required(ErrorMessage = "Informe o preço do Lanche")]
