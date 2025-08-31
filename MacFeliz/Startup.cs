@@ -21,7 +21,7 @@ public class Startup
         services.AddControllersWithViews();
 
         services.AddTransient<ILancheRopository, LancheRpository>();
-        services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+        services.AddTransient<ICategoriaRepository, CatogoriaRepository>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
