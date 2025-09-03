@@ -1,4 +1,5 @@
 ﻿using MacFeliz.Repositories.Interfaces;
+using MacFeliz.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MacFeliz.Controllers
@@ -15,8 +16,14 @@ namespace MacFeliz.Controllers
 
         public IActionResult List()
         {
-            var lanches = _lancheRopository.Lanches;
-            return View(lanches);
+            //var lanches = _lancheRopository.Lanches;
+            //return View(lanches);
+
+            var lanchListViewModel = new LancheListViewModel();
+            lanchListViewModel.Lanches = _lancheRopository.Lanches;
+            lanchListViewModel.CategoriaAtual = "Categoria atual";
+
+            return View(lanchListViewModel);
         }
     }
 }
