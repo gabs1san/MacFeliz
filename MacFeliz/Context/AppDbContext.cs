@@ -13,5 +13,7 @@ using MacFeliz.Models;
 
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Lanche> Lanche{ get; set; }
+
+        public DbSet<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
     }
 }
