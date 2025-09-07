@@ -65,5 +65,32 @@ namespace MacFeliz.Models
             }
             _context.SaveChanges();
         }
+
+        public int RemoverDoCarrinho(Lanche lanche)
+        {
+
+            var carrinhoCompaItem = _context.CarrinhoCompraItens.SingleOrDefault(
+                s => s.Lanche.LancheId == lanche.LancheId &&
+                s.CarrinhoCompraId == CarrinhoCompraId);
+
+            var quantidadeLocal = 0;
+
+            if(carrinhoCompaItem != null)
+            {
+                if(carrinhoCompaItem.Quantidade > 1)
+                {
+                    carrinhoCompaItem.Quantidade--;
+                    quantidadeLocal = carrinhoCompaItem.Quantidade;
+                }
+                else
+                {
+                    _context.CarrinhoCompraItens.Remove(carrinhoCompaItem);
+                }
+            } 
+
+            _context.SaveChanges(); 
+            return quantidadeLocal;    
+
+        }
     }
 }
