@@ -1,4 +1,10 @@
 ﻿using MacFeliz.Context;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MacFeliz.Models
 {
@@ -12,7 +18,7 @@ namespace MacFeliz.Models
         }
 
         public string CarrinhoCompraId { get; set; }
-        public  List<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
+        public List<CarrinhoCompraItem> CarrinhoCompraItems { get; set; }
 
         public static CarrinhoCompra GetCarrinho(IServiceProvider Services)
         {
@@ -34,6 +40,30 @@ namespace MacFeliz.Models
             {
                 CarrinhoCompraId = carrinhoId,
             };
+        }
+
+        public void AdicionarAoCarrinho(Lanche lanche)
+        {
+            var carrinhoCompaItem = _context.CarrinhoCompraItens.SingleOrDefault(
+                s => s.Lanche.LancheId == lanche.LancheId &&
+                s.CarrinhoCompraId == CarrinhoCompraId);
+
+            if(carrinhoCompaItem == null)
+            {
+                carrinhoCompaItem = new CarrinhoCompraItem
+                {
+                    CarrinhoCompraId = CarrinhoCompraId,
+                    Lanche = lanche,
+                    Quantidade = 1
+                };
+
+                _context.CarrinhoCompraItens.Add(carrinhoCompaItem);
+            }
+            else
+            {
+                carrinhoCompaItem.Quantidade++;
+            }
+            _context.SaveChanges();
         }
     }
 }
