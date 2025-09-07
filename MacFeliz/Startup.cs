@@ -1,7 +1,9 @@
 ﻿using MacFeliz.Context;
 using MacFeliz.Repositories;
 using MacFeliz.Repositories.Interfaces;
+using Microsoft.AspNetCore.Components.Forms.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 
 namespace MacFeliz;
 public class Startup
@@ -22,6 +24,11 @@ public class Startup
 
         services.AddTransient<ILancheRopository, LancheRpository>();
         services.AddTransient<ICategoriaRepository, CatogoriaRepository>();
+
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        services.AddMemoryCache();
+        services.AddSession();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +46,8 @@ public class Startup
         }
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        app.UseSession();
 
         app.UseRouting();
 
