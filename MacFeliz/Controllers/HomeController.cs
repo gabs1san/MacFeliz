@@ -1,4 +1,6 @@
 using MacFeliz.Models;
+using MacFeliz.Repositories.Interfaces;
+using MacFeliz.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,10 +9,21 @@ namespace MacFeliz.Controllers
     public class HomeController : Controller
     {
         
+        private  readonly ILancheRopository _lancheRopository;
+
+        public HomeController(ILancheRopository lancheRopository)
+        {
+            _lancheRopository = lancheRopository;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                LanchesPreferidos = _lancheRopository.LanchesPreferidos
+            };
+
+            return View(homeViewModel);
         }
 
       
