@@ -1,4 +1,5 @@
 ﻿using MacFeliz.Context;
+using MacFeliz.Models;
 using MacFeliz.Repositories;
 using MacFeliz.Repositories.Interfaces;
 using Microsoft.AspNetCore.Components.Forms.Mapping;
@@ -20,12 +21,14 @@ public class Startup
     {
         services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        services.AddControllersWithViews();
+        
 
         services.AddTransient<ILancheRopository, LancheRpository>();
         services.AddTransient<ICategoriaRepository, CatogoriaRepository>();
-
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
+
+        services.AddControllersWithViews();
 
         services.AddMemoryCache();
         services.AddSession();
