@@ -1,4 +1,5 @@
-﻿using MacFeliz.Repositories.Interfaces;
+﻿using MacFeliz.Models;
+using MacFeliz.Repositories.Interfaces;
 using MacFeliz.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +15,41 @@ namespace MacFeliz.Controllers
             _lancheRopository = lancheRopository;
         }
 
-        public IActionResult List()
+        public IActionResult List(string categoria)
         {
-            //var lanches = _lancheRopository.Lanches;
-            //return View(lanches);
+            IEnumerable<Lanche> lanches;
+            string categoriaAtual = string.Empty;
 
-            var lanchListViewModel = new LancheListViewModel();
-            lanchListViewModel.Lanches = _lancheRopository.Lanches;
-            lanchListViewModel.CategoriaAtual = "Categoria atual";
+            if (string.IsNullOrEmpty(categoria))
+            {
+                lanches = _lancheRopository.Lanches.OrderBy(l => l.LancheId);
+                categoriaAtual = "Todos os lanches";
+            }
+            else
+            {
+                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
+                {
+                    lanches = _lancheRopository.Lanches
+                        .Where(l => l.Categoria.CategoriaNome.Equals("Normal"))
+                        .OrderBy(l => l.Nome);
+                }
+                else
+                {
+                    lanches = _lancheRopository.Lanches
+                        .Where(l => l.Categoria.CategoriaNome.Equals("Natural"))
+                        .OrderBy(l => l.Nome);
+                }
+                categoriaAtual = categoria;
+            }
 
-            return View(lanchListViewModel);
+            var lanchesListViewModel = new LancheListViewModel
+            {
+                Lanches = lanches,
+                CategoriaAtual = categoriaAtual,
+            };
+
+            return View(lanchesListViewModel);
         }
+     
     }
 }
