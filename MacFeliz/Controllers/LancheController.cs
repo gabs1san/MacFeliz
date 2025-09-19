@@ -54,6 +54,12 @@ namespace MacFeliz.Controllers
 
             return View(lanchesListViewModel);
         }
+
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRopository.Lanches.FirstOrDefault(l => l.LancheId == lancheId);
+            return View(lanche);
+        }
      
     }
 }
