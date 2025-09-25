@@ -3,7 +3,11 @@
 <div class="container">
 <div class="row">
 
-    <img src="~/images/WhatsApp Image 2025-09-09 at 19.22.21.jpeg" />
+    <img src="~/images/Full-Cart-icon.png"/>
+
+    <div>
+        <h4> Seu carrinho de compras: </h4>
+    </div>
 
     <table class="table table-bordered table-striped">
 
@@ -30,7 +34,7 @@
 
                         <td class="text-center">
                             <a asp-controllet = "CarrinhoCompra" asp-action = "RemoverItemDoCarrinhoCompra"
-                                asp-route-lancheIde = "@item.Lanche.LancheId"><img src="~/images/WhatsApp Image 2025-09-09 at 19.39.26.jpeg"/>
+                                asp-route-lancheIde = "@item.Lanche.LancheId"><img src="~/images/delete.png"/>
                             </a>
                         </td>
                     </tr>
