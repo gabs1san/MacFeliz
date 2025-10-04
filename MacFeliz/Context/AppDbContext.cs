@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MacFeliz.Models;
-    
-    
-    namespace MacFeliz.Context
+using LanchesMac.Models;
+
+
+namespace MacFeliz.Context
 {
     public class AppDbContext : DbContext
     {
@@ -10,10 +11,11 @@ using MacFeliz.Models;
         {
 
         }
-
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Lanche> Lanche{ get; set; }
-
         public DbSet<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
+
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<PedidoDetalhe> PedidoDetalhes { get; set; }
     }
 }
