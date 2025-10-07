@@ -1,7 +1,7 @@
-﻿using MacFeliz.Models;
+﻿
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LanchesMac.Models
+namespace MacFeliz.Models
 {
     public class PedidoDetalhe
     {
