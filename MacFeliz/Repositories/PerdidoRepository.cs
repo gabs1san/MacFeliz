@@ -24,7 +24,7 @@ namespace MacFeliz.Repositories
             _appDbContext.SaveChanges();
 
             var carrinhoCompraItens = _carrinhoCompra.CarrinhoCompraItems;
-
+             
             foreach (var carrinhoItem in carrinhoCompraItens)
             {
                 var pedidoDetail = new PedidoDetalhe()
