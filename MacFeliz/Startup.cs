@@ -3,6 +3,7 @@ using MacFeliz.Models;
 using MacFeliz.Repositories;
 using MacFeliz.Repositories.Interfaces;
 using Microsoft.AspNetCore.Components.Forms.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 
@@ -21,7 +22,11 @@ public class Startup
     {
         services.AddDbContext<AppDbContext>(options =>
          options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        
+
+        services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
+
 
         services.AddTransient<ILancheRopository, LancheRpository>();
         services.AddTransient<ICategoriaRepository, CatogoriaRepository>();
@@ -54,10 +59,11 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseSession();
-
-        app.UseRouting();
-
+        app.UseAuthentication();
         app.UseAuthorization();
+        app.UseRouting();
+        app.UseAuthorization();
+
 
         app.UseEndpoints(endpoints =>
         {
