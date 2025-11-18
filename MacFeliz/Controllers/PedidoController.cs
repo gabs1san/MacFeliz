@@ -31,13 +31,13 @@ namespace MacFeliz.Controllers
 
             if (_carrinhoCompra.CarrinhoCompraItems.Count == 0)
             {
-                ModelState.AddModelError("", "Seu carrinho está vazio, qual escolher um lanche...");
+                ModelState.AddModelError("", "Seu carrinho está vazio, qual tal escolher um lanche...");
             }
 
             foreach (var item in items)
             {
                 totalIntensPedido += item.Quantidade;
-                precoTotalPedido += item.Lanche.Preco * item.Quantidade;
+                precoTotalPedido += (item.Lanche.Preco * item.Quantidade);
             }
 
             pedido.TotalItensPedido = totalIntensPedido;
@@ -47,10 +47,10 @@ namespace MacFeliz.Controllers
             {
                 _pedidoRepostory.CriarPedido(pedido);
                 ViewBag.CheckoutCompletoMensagem = "Obrigado pelo seu pedido ;)";
-                ViewBag.TotaPedido = _carrinhoCompra.GetCarrinhoCompraTotal();
+                ViewBag.TotalPedido = _carrinhoCompra.GetCarrinhoCompraTotal();
 
                 _carrinhoCompra.LimparCarrinho();
-                return View("~View/Pedido/CheckOutCompleto.cshtml", pedido);
+                return View("~/Views/Pedido/CheckoutCompleto.cshtml", pedido);
             }
             return View(pedido);
         }

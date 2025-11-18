@@ -18,7 +18,9 @@ namespace MacFeliz.Models
 
         [Required(ErrorMessage = "Informe seu endereço")]
         [StringLength(100)]
+        [Display(Name = "Endereço")]
         public string Endereco1 { get; set; }
+
 
         [StringLength(50)]
         [Display(Name = "Complemento")]
