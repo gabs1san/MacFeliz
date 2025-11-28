@@ -58,6 +58,11 @@ namespace MacFeliz.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(LoginViewModel registroVM)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(registroVM);
+            }
+
             var user = new IdentityUser { UserName = registroVM.UserName };
             var result = await _userManager.CreateAsync(user, registroVM.Password);
 
