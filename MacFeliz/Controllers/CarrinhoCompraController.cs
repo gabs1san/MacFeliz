@@ -1,6 +1,7 @@
 ﻿using MacFeliz.Models;
 using MacFeliz.Repositories.Interfaces;
 using MacFeliz.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MacFeliz.Controllers
@@ -32,6 +33,7 @@ namespace MacFeliz.Controllers
             return View(carrinhoCompraVM);
         }
 
+        [Authorize]
         public IActionResult AdicionarItemNoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRopository.Lanches.FirstOrDefault(p => p.LancheId == lancheId);
@@ -41,6 +43,8 @@ namespace MacFeliz.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [Authorize]
         public IActionResult RemoverItemDoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRopository.Lanches.FirstOrDefault(p => p.LancheId == lancheId);

@@ -66,9 +66,9 @@ namespace MacFeliz.Controllers
             var user = new IdentityUser { UserName = registroVM.UserName };
             var result = await _userManager.CreateAsync(user, registroVM.Password);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
-               await _signInManager.SignInAsync(user, isPersistent: false);
+                await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Login", "Account");
             }
             else
@@ -77,6 +77,15 @@ namespace MacFeliz.Controllers
             }
 
             return View(registroVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            HttpContext.User = null;
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
