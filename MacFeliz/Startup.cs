@@ -2,6 +2,7 @@
 using MacFeliz.Models;
 using MacFeliz.Repositories;
 using MacFeliz.Repositories.Interfaces;
+using MacFeliz.Services;
 using Microsoft.AspNetCore.Components.Forms.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ public class Startup
         services.AddTransient<ILancheRopository, LancheRpository>();
         services.AddTransient<ICategoriaRepository, CatogoriaRepository>();
 
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
@@ -54,7 +57,7 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
     {
         if (env.IsDevelopment())
         {
@@ -70,9 +73,14 @@ public class Startup
         app.UseStaticFiles();
 
         app.UseSession();
+
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseRouting();
+
+        seedUserRoleInitial.SeedRoles();
+        seedUserRoleInitial.SeedUsers();  
+
         app.UseAuthorization();
 
 
