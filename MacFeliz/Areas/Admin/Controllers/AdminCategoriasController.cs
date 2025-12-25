@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MacFeliz.Context;
 using MacFeliz.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MacFeliz.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles="Admin")]
     public class AdminCategoriasController : Controller
     {
         private readonly AppDbContext _context;
