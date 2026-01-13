@@ -29,6 +29,15 @@ public class Startup
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders();
 
+        services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/Account/Login";
+            options.AccessDeniedPath = "/Account/AccessDenied";
+            options.LogoutPath = "/Account/Logout";
+        });
+
+        services.Configure<ConfigurationImagens>(Configuration.GetSection("ConfigurationPastaImagens"));
+
         services.Configure<IdentityOptions>(options =>
         {
             options.Password.RequireDigit = true;
@@ -76,11 +85,12 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
+        app.UseRouting();
         app.UseSession();
-
+        
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseRouting();
+        
 
         seedUserRoleInitial.SeedRoles();
         seedUserRoleInitial.SeedUsers();  
