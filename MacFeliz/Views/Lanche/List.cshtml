@@ -4,16 +4,11 @@
     <h2>@Model.CategoriaAtual</h2>
 </div>
 
-
 <div class="container">
     <div class="row">
-
         @foreach (var lanche in Model.Lanches)
         {
-            <div class="col-sm-4 col-md-4 col-lg-4">
-
-                <partial name= "_LanchesResumo" model= "@lanche" />
-            </div>
+            <partial name="_LanchesResumo" for="@lanche" />
         }
     </div>
 </div>
