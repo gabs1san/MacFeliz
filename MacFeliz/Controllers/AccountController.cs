@@ -40,7 +40,7 @@ namespace MacFeliz.Controllers
                 {
                     if (!string.IsNullOrEmpty(loginVM.ReturnUrl))
                     {
-                        return Redirect(loginVM.ReturnUrl);
+                        return Redirect(loginVM.ReturnUrl); 
                     }
                     return RedirectToAction("Index", "Home");
                 }
