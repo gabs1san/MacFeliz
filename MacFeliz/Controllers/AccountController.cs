@@ -38,7 +38,7 @@ namespace MacFeliz.Controllers
                 var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(loginVM.ReturnUrl))
+                    if (!string.IsNullOrEmpty(loginVM.ReturnUrl)) 
                     {
                         return Redirect(loginVM.ReturnUrl); 
                     }
