@@ -16,7 +16,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-nav">
-        <a class="nav-link text-light" asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.Query)" style="color:white"> &nbsp; Login&nbsp; </a>
+        <a class="nav-link text-light" asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.QueryString)" style="color:white"> &nbsp; Login&nbsp; </a>
         <a class="nav-link text-light" asp-controller="Account" asp-action="Register" style="color:white">&nbsp;Registro&nbsp;&nbsp;</a>
     </ul>
 

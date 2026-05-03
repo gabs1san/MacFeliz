@@ -15,7 +15,7 @@ namespace MacFeliz.Controllers
             _signInManager = signInManager;
         }
 
-
+        
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel()

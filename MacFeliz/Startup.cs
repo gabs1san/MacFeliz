@@ -87,35 +87,30 @@ public class Startup
 
         app.UseRouting();
         app.UseSession();
-        
+
         app.UseAuthentication();
         app.UseAuthorization();
-        
 
         seedUserRoleInitial.SeedRoles();
-        seedUserRoleInitial.SeedUsers();  
-
-        app.UseAuthorization();
-
+        seedUserRoleInitial.SeedUsers();
 
         app.UseEndpoints(endpoints =>
         {
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-            name: "areas",
-            pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
-                 );
-            });
+            endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+            );
 
             endpoints.MapControllerRoute(
                 name: "categoriaFiltro",
                 pattern: "Lanche/{action}/{categoria?}",
-                defaults: new { Controller = "Lanche", action = "List" });
+                defaults: new { controller = "Lanche", action = "List" }
+            );
 
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
         });
     }
 }
