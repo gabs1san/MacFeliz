@@ -1,0 +1,73 @@
+﻿@model MacFeliz.Areas.Admin.ViewModels.RelatorioVendasViewModel
+
+@{
+    ViewData["Title"] = "Relatório de Vendas";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Relatório de Vendas</h2>
+
+    <form method="get" class="row mb-4">
+
+        <div class="col-md-4">
+            <label>Data Inicial</label>
+            <input type="date"
+                   name="dataInicial"
+                   class="form-control"
+                   value="@Model.DataInicial?.ToString("yyyy-MM-dd")" />
+        </div>
+
+        <div class="col-md-4">
+            <label>Data Final</label>
+            <input type="date"
+                   name="dataFinal"
+                   class="form-control"
+                   value="@Model.DataFinal?.ToString("yyyy-MM-dd")" />
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary w-100">
+                Filtrar
+            </button>
+        </div>
+
+    </form>
+
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5>Total de Pedidos</h5>
+                    <h2>@Model.TotalPedidos</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5>Total Vendido</h5>
+                    <h2>
+                        @Model.TotalVendas.ToString("C")
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5>Produtos Vendidos</h5>
+                    <h2>@Model.TotalProdutosVendidos</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
